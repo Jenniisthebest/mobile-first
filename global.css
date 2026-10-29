@@ -1,77 +1,197 @@
+
+:root {
+    --overlay-color: rgba(0, 0, 0, 0.5);
+    --pink-color: pink;
+    --border-color: rgb(192, 130, 141);
+}
+
+* {
+    box-sizing: border-box;
+}
+
 .page {
     display: grid;
-    gap: lrem;
-    grid-template-areas: "header" "main" "aside-left" "aside-right" "footer";
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "aside-left"
+        "main"
+        "aside-right"
+        "footer";
+    width: 100%;
+    max-width: 2000px;
+    margin: 0 auto;
+    background-color:pink;
 }
 
 .site-header {
     grid-area: header;
+    background-color: var(--pink-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius:20px;
+    padding:1rem;
+}
+
+.links {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+    display: flex;
+    justify-content:flex-start;
 }
 
 .site-main {
     grid-area: main;
+    min-width: 0;
 }
 
 .site-aside-left {
     grid-area: aside-left;
-}
-.site-aside-right {
-    grid-area: aside-right;
-}
-.site-footer{
-    grid-area: footer;
+    text-align: left;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 1rem;
+    min-width: 0;
+    background-color:rgba(245, 245, 220, 0.452);
 }
 
+.site-aside-right {
+    grid-area: aside-right;
+    text-align: left;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 1rem;
+    min-width: 0;
+    background-color: rgba(245, 245, 220, 0.452);
+}
+
+.site-footer {
+    grid-area: footer;
+    background-color: rgba(245, 245, 220, 0.452);
+    width: 100%;
+    min-height: 90px;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 1rem;
+
+}
+.footerlogo{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* Main product image */
 #pinkwhisk {
     width: 200px;
     height: 200px;
+    max-width: 100%;
+    object-fit: contain;
 }
 
-.product-info{
+/* Product information */
+.product-info {
     display: flex;
-    width: 200px;
-    height: 200px;
-    border-radius: 10px; 
-}
-
-.product-card{
-    text-align: center;
-    border: 2px solid black;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 200px;
+    min-height: 200px;
     border-radius: 10px;
 }
 
-.product-image{
-    border-radius: 8px;
-    width:200px;
-    height:100px;
+/* Individual product card */
+.product-card {
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px;
+    min-width: 0;
+    background-color:rgba(245, 245, 220, 0.452);
 }
 
-.products{
-    display:grid;
-    grid-template-columns: repeat(1, 1fr);
-    align-items: center;
+/* Product image */
+.product-image {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+/* Product grid */
+.products {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
     gap: 10px;
 }
 
-.product-footer{
-    display:flex;
+/* Product card footer */
+.product-footer {
+    display: flex;
     flex-direction: row;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     border-radius: 20px;
-    padding:1%;
+    padding: 1%;
 }
 
-@media (min-width: 1024px){
+/* Photo section */
+.photo {
+    background-color: var(--overlay-color);
+}
+
+/* Tablet layout */
+@media (min-width: 600px) {
     .page {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-areas: 
-        "header header header header"
-        "aside-left main main aside-right"
-        "footer footer footer footer";
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas:
+            "header header"
+            "aside-left main"
+            "aside-right main"
+            "footer footer";
     }
 
     .products {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
+/* Desktop layout */
+@media (min-width: 1024px) {
+    .page {
+        grid-template-columns:
+            minmax(180px, 1fr)
+            minmax(0, 2fr)
+            minmax(180px, 1fr);
+        grid-template-areas:
+            "header header header"
+            "aside-left main aside-right"
+            "footer footer footer";
+    }
+
+    .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
